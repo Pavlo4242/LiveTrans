@@ -1,0 +1,16 @@
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\audio\AudioHandler.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\viewmodel\MainViewModel.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\data\TranslationRepository.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\output\TextToSpeechManager.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\data\ApiModels.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\dialog\UserSettingsDialogFragment.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\data\UIState.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\network\WebSocketClient.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\components\TranslationList.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\dialog\SettingsDialog.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\data\ServerModels.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\view\MainActivity.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\components\StatusBar.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\ui\TranslationAdapter.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\viewmodel\MainViewModelFactory.kt
+D:\ANDROID\LiveTrans\livegeminiapi\src\main\java\com\audio\AudioPlayer.kt

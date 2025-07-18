@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="api_keys">
+        <item>Rayven:AIzaSyCBnpGnbCKy7gxqMkDkBuCc78Rf40D1auA</item>
+        <item>Lan1a:AIzaSyDsTrGpp8mrr470vQrztyz3SOSnoxdtQJc</item>
+    </string-array>
+    <string-array name="api_versions">
+        <item>v1alpha</item>
+        <item>v1</item>
+        <item>v1beta</item>
+        <item>v1beta1</item>
+    </string-array>
+    <color name="black">#FF000000</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">bwctrans</string>
+    <style name="Theme.bwctrans" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+</resources>
