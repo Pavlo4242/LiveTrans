@@ -71,8 +71,7 @@ implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0") // for lifecycl
 // Activity KTX for by viewModels()
 implementation("androidx.activity:activity-ktx:1.9.0")
 
-// For DataBinding
-    kapt ("com.android.databinding:compiler:8.2.0")
+  
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
