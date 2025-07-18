@@ -52,20 +52,7 @@ android {
         }
     }
 
-    // --- THIS IS THE FIX ---
-    // This block explicitly tells Gradle where to find the source code
-    // for all build types, stopping it from looking for folders that don't exist.
-    sourceSets {
-        getByName("main") {
-            java.srcDirs("src/main/java")
-        }
-        getByName("debug") {
-            java.srcDirs("src/main/java")
-        }
-        getByName("release") {
-            java.srcDirs("src/main/java")
-        }
-    }
+   
 }
 
 dependencies {
