@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-59:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Thomas\\.gradle\\caches\\transforms-3\\8da077395c7a5df4f9c32e49e13e2ec4\\transformed\\appcompat-1.6.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}
