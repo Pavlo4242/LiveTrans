@@ -76,6 +76,14 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.code.gson:gson:2.10.1")
 
+// ViewModel and LiveData
+implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0") // for lifecycleScope
+
+// Activity KTX for by viewModels()
+implementation("androidx.activity:activity-ktx:1.9.0")
+
 // For DataBinding
     kapt ("com.android.databinding:compiler:8.2.0")
 
