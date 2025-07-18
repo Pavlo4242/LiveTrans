@@ -1,4 +1,3 @@
-// app/src/main/java/com/bwctrans/ui/SettingsDialog.kt
 package com.bwctrans.ui
 
 import android.app.Dialog
@@ -26,8 +25,8 @@ class SettingsDialog(
     interface DevSettingsListener {
         fun onForceConnect()
         fun onSettingsSaved()
-        fun onShareLog() // New
-        fun onClearLog() // New
+        fun onShareLog()
+        fun onClearLog()
     }
 
     // --- PROPERTIES ---
@@ -71,12 +70,13 @@ class SettingsDialog(
         selectedApiKeyInfo = apiKeysList.firstOrNull { it.value == currentApiKeyValue }
 
         // Model
-        selectedModel = prefs.getString("selected_model", models.firstOrNull() ?: "")
+        selectedModel = prefs.getString("selected_model", models.firstOrNull()) ?: ""
     }
 
     private fun setupViews() {
         // --- CONNECTION ---
-        binding.hostManualEditText.setText(prefs.getString("api_host", "generativelanguage.googleapis.com"))
+        // FIX: Add a non-null default to prevent type mismatch
+        binding.hostManualEditText.setText(prefs.getString("api_host", "generativelanguage.googleapis.com") ?: "generativelanguage.googleapis.com")
 
         apiVersionsList.forEach { apiVersion ->
             binding.apiVersionRadioGroup.addView(RadioButton(context).apply {
@@ -89,7 +89,8 @@ class SettingsDialog(
             selectedApiVersion = group.findViewById<RadioButton>(checkedId).tag as ApiVersion
         }
 
-        binding.apiKeyManualEditText.setText(prefs.getString("api_key", ""))
+        // FIX: Add a non-null default to prevent type mismatch
+        binding.apiKeyManualEditText.setText(prefs.getString("api_key", "") ?: "")
         apiKeysList.forEach { apiKey ->
             binding.apiKeyRadioGroup.addView(RadioButton(context).apply {
                 text = apiKey.displayName
@@ -102,9 +103,8 @@ class SettingsDialog(
             binding.apiKeyManualEditText.setText(keyInfo.value)
         }
 
-
         // --- MODEL & BEHAVIOR ---
-        binding.modelManualEditText.setText(selectedModel)
+        binding.modelManualEditText.setText(selectedModel) // This one was already safe
         models.forEach { model ->
             binding.modelRadioGroup.addView(RadioButton(context).apply {
                 text = model
@@ -132,7 +132,6 @@ class SettingsDialog(
         binding.debugOverlaySwitch.isChecked = prefs.getBoolean("show_debug_overlay", false)
         binding.shareLogBtn.setOnClickListener {
             listener.onShareLog()
-            // We don't dismiss the dialog here, let the user continue configuring
         }
         binding.clearLogBtn.setOnClickListener {
             listener.onClearLog()
@@ -145,7 +144,7 @@ class SettingsDialog(
             dismiss()
         }
         binding.forceConnectBtn.setOnClickListener {
-            saveSettings() // Save settings before reconnecting
+            saveSettings()
             listener.onForceConnect()
             dismiss()
         }
