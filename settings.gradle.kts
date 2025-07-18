@@ -21,5 +21,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "bwctrans"
-include(":app")
+rootProject.name = "livegemini"
+include(":livegeminiapi")

@@ -1,4 +1,4 @@
-package com.bwctrans.data
+package com.livegemini.data
 
 // Data class for API Versions (e.g., "v1alpha (Preview)" and "v1alpha")
 data class ApiVersion(

@@ -1,5 +1,5 @@
-// app/src/main/java/com/bwctrans/data/UiState.kt
-package com.bwctrans.data
+// app/src/main/java/com/livegemini/data/UiState.kt
+package com.livegemini.data
 
 data class UiState(
     val statusText: String = "Status: Disconnected\nTap the microphone to connect",

@@ -1,5 +1,5 @@
-// app/src/main/java/com/bwctrans/data/ServerModels.kt
-package com.bwctrans.data
+// app/src/main/java/com/livegemini/data/ServerModels.kt
+package com.livegemini.data
 
 import com.google.gson.annotations.SerializedName
 
