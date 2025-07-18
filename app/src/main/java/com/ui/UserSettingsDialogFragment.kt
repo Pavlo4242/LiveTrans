@@ -1,20 +1,23 @@
-package com.bwctrans
+// app/src/main/java/com/bwctrans/ui/UserSettingsDialogFragment.kt
+package com.bwctrans.ui
 
+import android.Manifest
+import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
-import com.bwctrans.databinding.DialogUserSettingsBinding // IMPORTANT: Use the new binding class
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import android.Manifest
 import androidx.core.content.ContextCompat
-import android.content.pm.PackageManager
+import com.bwctrans.databinding.DialogUserSettingsBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class UserSettingsDialogFragment : BottomSheetDialogFragment() {
 
-    // --- NEW: Interface for communication ---
     interface UserSettingsListener {
         fun onRequestPermission()
     }
@@ -31,13 +34,26 @@ class UserSettingsDialogFragment : BottomSheetDialogFragment() {
             throw RuntimeException("$context must implement UserSettingsListener")
         }
     }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DialogUserSettingsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setOnShowListener {
+            val bottomSheet = dialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+            if (bottomSheet != null) {
+                val behavior = BottomSheetBehavior.from(bottomSheet)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
+            }
+        }
+        return dialog
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,13 +73,14 @@ class UserSettingsDialogFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        // --- NEW: Logic for the permission button ---
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             binding.requestPermissionBtn.visibility = View.VISIBLE
             binding.requestPermissionBtn.setOnClickListener {
                 listener?.onRequestPermission()
                 dismiss()
             }
+        } else {
+            binding.requestPermissionBtn.visibility = View.GONE
         }
     }
 

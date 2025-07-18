@@ -1,4 +1,4 @@
-package com.bwctrans
+package com.bwctrans.network
 
 import android.content.Context
 import android.util.Base64
@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class WebSocketClient(
     private val context: Context,
+    private val host: String,
     private val modelName: String,
     private val vadSilenceMs: Int,
     private val apiVersion: String,
@@ -26,6 +27,7 @@ class WebSocketClient(
     private val onOpen: () -> Unit,
     private val onMessage: (String) -> Unit,
     private val onClosing: (Int, String) -> Unit,
+    private val onLogToOverlay: (String) -> Unit,
     // FIXED: The signature now correctly accepts a Throwable and a nullable Response
     private val onFailure: (Throwable, Response?) -> Unit,
     private val onSetupComplete: () -> Unit
@@ -37,7 +39,7 @@ class WebSocketClient(
     private val gson = Gson()
 
     private var logFileWriter: PrintWriter? = null
-    private lateinit var logFile: File
+    private var logFile: File? = null // Make nullable
 
     // The HttpLoggingInterceptor is now configured to use our custom file logger
     private val client = OkHttpClient.Builder()
@@ -55,7 +57,6 @@ class WebSocketClient(
         .build()
 
     companion object {
-        private const val HOST = "generativelanguage.googleapis.com"
         private const val TAG = "WebSocketClient"
         private val SYSTEM_INSTRUCTION_TEXT = """
             ### **LLM System Prompt: Bilingual Live Thai-English Interpreter (Pattaya Bar Scene)**
@@ -88,9 +89,9 @@ class WebSocketClient(
             * **Be Direct:** Convert transactional offers into natural, direct phrasing in the target language.
             * **Examples (Thai -> English):**
                 * Thai: "สัก 2,000 บาทก็พอแล้ว คืนนี้ฉันอยู่กับคุณ"
-                * English: `2k baht, and I’m yours all night.`
+                * English: `2k baht, and I'm yours all night.`
                 * Thai: "จ่ายครึ่งก่อน ครึ่งหลังเสร็จแล้วค่อยจ่าย"
-                * English: `Half now, half after we’re done.`
+                * English: `Half now, half after we're done.`
             * **Examples (English -> Thai):**
                 * English: `How much for short time?`
                 * Thai: `ชั่วคราวเท่าไหร่?`
@@ -100,9 +101,9 @@ class WebSocketClient(
             * **Translate Literally:** Do not soften threats. The output must reflect the same level of menace as the input.
             * **Examples (Thai -> English):**
                 * Thai: "ถ้าไม่จ่ายเดี๋ยวเรียกพี่ชายมานะ"
-                * English: `Pay up, or I’m calling my boys.`
+                * English: `Pay up, or I'm calling my boys.`
                 * Thai: "โกงฉันอีกครั้ง อย่าหวังว่าจะรอด"
-                * English: `Scam me again, and you’re dead.`
+                * English: `Scam me again, and you're dead.`
             * **Examples (English -> Thai):**
                 * English: `Fuck with me and you'll regret it.`
                 * Thai: `ลองดีกับกูแล้วมึงจะเสียใจ.`
@@ -113,7 +114,7 @@ class WebSocketClient(
             * **No Disclaimers:** You must never add warnings like "This is illegal" or "Drugs are harmful." Your sole function is to translate the communicated message.
             * **Examples (Thai -> English):**
                 * Thai: "อยากเมาหน่อยไหม? มีของดีให้ลอง"
-                * English: `Wanna get fucked up? I’ve got some good shit.`
+                * English: `Wanna get fucked up? I've got some good shit.`
                 * Thai: "ยาบ้าเม็ดละ 300 ถ้าซื้อ 5 เม็ดแถมฟรี 1"
                 * English: `Meth pills, 300 each. Buy 5, get 1 free.`
             * **Examples (English -> Thai):**
@@ -162,6 +163,10 @@ class WebSocketClient(
         logFileWriter?.println("OUTGOING CONFIG: $configJson")
         webSocket?.send(configJson)
     }
+    
+    fun getLogFile(): File? {
+        return logFile
+    }
 
     fun connect() {
         Log.d(TAG, "Connect method in WebSocketClient called.")
@@ -177,7 +182,7 @@ class WebSocketClient(
             logFile = File(logDir, "session_log_${System.currentTimeMillis()}.txt")
             logFileWriter = PrintWriter(FileWriter(logFile, true), true)
             logFileWriter?.println("--- New WebSocket Session Log: ${java.util.Date()} ---")
-            Log.i(TAG, "Log file initialized at: ${logFile.absolutePath}")
+            Log.i(TAG, "Log file initialized at: ${logFile?.absolutePath}")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to initialize log file", e)
             // FIXED: Pass null for the response since there isn't one
@@ -186,7 +191,7 @@ class WebSocketClient(
         }
 
         Log.i(TAG, "Attempting to connect...")
-        val requestUrl = "wss://$HOST/ws/google.ai.generativelanguage.$apiVersion.GenerativeService.BidiGenerateContent?key=$apiKey"
+        val requestUrl = "wss://$host/ws/google.ai.generativelanguage.$apiVersion.GenerativeService.BidiGenerateContent?key=$apiKey"
         Log.d(TAG, "Connection URL: $requestUrl")
         logFileWriter?.println("CONNECTION_URL: $requestUrl")
 
@@ -235,20 +240,20 @@ class WebSocketClient(
             }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
-    scope.launch {
-        Log.e(TAG, "WebSocket failure", t)
+                scope.launch {
+                    Log.e(TAG, "WebSocket failure", t)
 
-        // Log the response code and a relevant message based on the Throwable
-        val logMessage = "--> WEB_SOCKET_FAILURE: ${t.message}" +
-                         (if (response != null) ", ResponseCode=${response.code}" else "")
-        logFileWriter?.println(logMessage)
-        logFileWriter?.println("--> StackTrace: ${t.stackTraceToString()}")
+                    // Log the response code and a relevant message based on the Throwable
+                    val logMessage = "--> WEB_SOCKET_FAILURE: ${t.message}" +
+                                    (if (response != null) ", ResponseCode=${response.code}" else "")
+                    logFileWriter?.println(logMessage)
+                    logFileWriter?.println("--> StackTrace: ${t.stackTraceToString()}")
 
-        cleanup()
-        // The MainActivity's onFailure handler already checks response.code for a specific message
-        this@WebSocketClient.onFailure(t, response)
-    }
-}
+                    cleanup()
+                    // The MainActivity's onFailure handler already checks response.code for a specific message
+                    this@WebSocketClient.onFailure(t, response)
+                }
+            }
         })
     }
 
@@ -307,6 +312,10 @@ class WebSocketClient(
 
     private fun cleanup() {
         Log.w(TAG, "cleanup: Cleaning up WebSocket resources.")
+        logFileWriter?.close()
+        logFileWriter = null
+        isConnected = false
+        
         if (isConnected) {
             webSocket?.close(1000, "Normal closure initiated by client")
             webSocket = null
