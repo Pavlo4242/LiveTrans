@@ -34,8 +34,7 @@ class MainViewModel(private val application: Application) : ViewModel() {
     private val _events = MutableSharedFlow<ViewEvent>()
     val events: SharedFlow<ViewEvent> = _events.asSharedFlow()
 
-    sealed class ViewEvent {
-        data class ShowToast(val message: String) : ViewEvent()
+    
     }
 
     // --- PRIVATE PROPERTIES ---
