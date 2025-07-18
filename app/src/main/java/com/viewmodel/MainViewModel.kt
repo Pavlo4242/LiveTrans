@@ -34,7 +34,9 @@ class MainViewModel(private val application: Application) : ViewModel() {
     private val _events = MutableSharedFlow<ViewEvent>()
     val events: SharedFlow<ViewEvent> = _events.asSharedFlow()
 
-    
+    sealed class ViewEvent {
+        data class ShowToast(val message: String) : ViewEvent()
+        data class ShareFile(val fileUri: android.net.Uri, val mimeType: String) : ViewEvent()
     }
 
     // --- PRIVATE PROPERTIES ---
@@ -60,11 +62,6 @@ class MainViewModel(private val application: Application) : ViewModel() {
     private var selectedModel: String = ""
     private var selectedApiVersion: ApiVersion? = null
     private var selectedApiKey: ApiKeyInfo? = null
-
-	sealed class ViewEvent {
-        data class ShowToast(val message: String) : ViewEvent()
-        data class ShareFile(val fileUri: android.net.Uri, val mimeType: String) : ViewEvent()
-    }
 
     init {
         Log.d(TAG, "ViewModel initialized")
@@ -94,13 +91,13 @@ class MainViewModel(private val application: Application) : ViewModel() {
             stopAudio()
         }
     }
-	
-	fun onClearLog() {
+    
+    fun onClearLog() {
         _uiState.update { it.copy(debugLog = "") }
     }
-	
-	
-	fun onShareLog() {
+    
+    
+    fun onShareLog() {
         viewModelScope.launch {
             val file = webSocketClient?.getLogFile()
             if (file != null && file.exists()) {
@@ -115,7 +112,7 @@ class MainViewModel(private val application: Application) : ViewModel() {
             }
         }
     }
-	
+    
 
     fun onConnectDisconnectClicked() {
         if (_uiState.value.isSessionActive) {
