@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.livegemini.livegeminiapi-mergeDebugResources-67:/layout/dialog_user_settings.xml",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/dialog_user_settings.xml"
+    },
+    {
+        "merged": "com.livegemini.livegeminiapi-mergeDebugResources-67:/layout/activity_main.xml",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.livegemini.livegeminiapi-mergeDebugResources-67:/layout/item_translation.xml",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/item_translation.xml"
+    },
+    {
+        "merged": "com.livegemini.livegeminiapi-mergeDebugResources-67:/layout/dialog_settings.xml",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/dialog_settings.xml"
+    }
+]
