@@ -29,7 +29,7 @@ jobs:
       run: ./gradlew assembleDebug
 
     - name: List Generated APK Files
-      run: ls -l app/build/outputs/apk/debug/
+      run:  find / -type f -name "*.apk" 2>/dev/null
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
