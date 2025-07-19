@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.Modifier // Add this import
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModelProvider
@@ -13,12 +12,7 @@ import com.livegemini.audio.AudioHandler
 import com.livegemini.network.WebSocketClient
 import com.livegemini.viewmodel.MainViewModel
 import com.livegemini.viewmodel.MainViewModelFactory
-import com.livegemini.viewmodel.ViewEvent
-// Assuming these composables and the theme exist in your project
-// import com.livegemini.ui.theme.BwcTransTheme
-// import com.livegemini.ui.MicButton
-// import com.livegemini.ui.StatusBar
-// import com.livegemini.ui.TranslationList
+import com.livegemini.ui.view.MainScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -31,10 +25,15 @@ class MainActivity : ComponentActivity() {
         audioHandler = AudioHandler(applicationContext) { audioData ->
             // Pass audio data to ViewModel to send via WebSocket
             // This is handled internally by MainViewModel via audioHandler.startRecording() callback
+            // Note: The audio data is now passed directly to the WebSocketClient within MainViewModel
+            // This lambda in AudioHandler's constructor is for AudioHandler to provide data,
+            // but MainViewModel directly calls webSocketClient.sendAudio(audioData)
+            // within its own startRecording method.
         }
 
-        // Initialize WebSocketClient.Factory with applicationContext
-        val webSocketClientFactory = WebSocketClient.Factory(applicationContext)
+        // Fix for "Unresolved reference: Factory" on WebSocketClient.Factory
+        // Correctly reference the WebSocketClient.Factory singleton object
+        val webSocketClientFactory = WebSocketClient.Companion
 
         val factory = MainViewModelFactory(application, audioHandler, webSocketClientFactory)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
@@ -44,28 +43,12 @@ class MainActivity : ComponentActivity() {
             // BwcTransTheme {
             val uiState by viewModel.uiState.collectAsState()
 
-            Column {
-                // StatusBar(
-                //     statusText = uiState.statusText,
-                //     toolbarInfoText = uiState.toolbarInfoText,
-                //     isSessionActive = uiState.isSessionActive,
-                //     onConnectDisconnect = { viewModel.handleEvent(ViewEvent.ConnectClicked) }
-                // )
-
-                // TranslationList(
-                //     translations = uiState.translations,
-                //     modifier = Modifier.weight(1f)
-                // )
-
-                // MicButton(
-                //     isListening = uiState.isListening,
-                //     enabled = uiState.isMicButtonEnabled,
-                //     onClick = { viewModel.handleEvent(ViewEvent.MicClicked) }
-                // )
-            }
+            MainScreen(viewModel = viewModel)
             // }
         }
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

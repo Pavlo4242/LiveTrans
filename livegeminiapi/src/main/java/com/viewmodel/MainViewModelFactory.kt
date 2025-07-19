@@ -1,17 +1,20 @@
-package com.viewmodel
+package com.livegemini.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.audio.AudioHandler
-import com.network.WebSocketClient
+import com.livegemini.audio.AudioHandler
+import com.livegemini.network.WebSocketClient
 
 class MainViewModelFactory(
+    private val application: Application,
     private val audioHandler: AudioHandler,
-    private val webSocketFactory: WebSocketClient.Factory
+    private val webSocketFactory: WebSocketClient.Companion // Corrected usage of Factory
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(audioHandler, webSocketFactory) as T
+            @Suppress("UNCHECKED_CAST")
+            return MainViewModel(application, audioHandler, webSocketFactory) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

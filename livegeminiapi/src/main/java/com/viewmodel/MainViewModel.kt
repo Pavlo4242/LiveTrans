@@ -1,5 +1,6 @@
 package com.livegemini.viewmodel
 
+import com.livegemini.ui.components.Constant
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -14,11 +15,12 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.content.FileProvider
 
 class MainViewModel(
-    application: Application,
+    private val application: Application,
     private val audioHandler: AudioHandler,
-    private val webSocketFactory: WebSocketClient.Factory
+    private val webSocketFactory: WebSocketClient.Companion
 ) : ViewModel() {
 
     // State management
@@ -57,7 +59,6 @@ class MainViewModel(
 
     init {
         loadConfiguration()
-        initializeAudioHandler()
         updateToolbarText()
     }
 
@@ -75,7 +76,6 @@ class MainViewModel(
 
     fun onPermissionResult(granted: Boolean) {
         _uiState.update { it.copy(isMicButtonEnabled = granted) }
-        if (granted) initializeAudioHandler()
     }
 
     // Core logic
@@ -92,17 +92,21 @@ class MainViewModel(
 
         _uiState.update { it.copy(isSessionActive = true, statusText = "Connecting...") }
 
-        webSocketClient = webSocketFactory.create(
-            host = prefs.getString("api_host", "generativelanguage.googleapis.com") ?: "generativelanguage.googleapis.com",
-            modelName = prefs.getString("selected_model", models.first()) ?: models.first(),
-            vadSilenceMs = prefs.getInt("vad_sensitivity_ms", 800),
-            apiVersion = prefs.getString("api_version", "v1beta") ?: "v1beta",
-            apiKey = prefs.getString("api_key", "") ?: "",
-            sessionHandle = sessionHandle,
-            systemInstruction = resources.getString(R.string.system_instruction),
-            listener = object : WebSocketClient.Listener {
+        webSocketClient = webSocketFactory.create( // Corrected call to use the factory instance
+            context = application, // Pass application context
+            config = WebSocketClient.WebSocketConfig(
+                host = prefs.getString("api_host", "generativelanguage.googleapis.com") ?: "generativelanguage.googleapis.com",
+                modelName = prefs.getString("selected_model", models.first()) ?: models.first(),
+                vadSilenceMs = prefs.getInt("vad_sensitivity_ms", 800),
+                apiVersion = prefs.getString("api_version", "v1beta") ?: "v1beta",
+                apiKey = prefs.getString("api_key", "") ?: "",
+                sessionHandle = sessionHandle,
+                systemInstruction = Constant.SYSTEM_INSTRUCTION
+                //systemInstruction = getString(R.string.system_instruction) // Correctly referencing system_instruction
+            ),
+            listener = object : WebSocketClient.WebSocketListener {
                 override fun onOpen() = handleWebSocketOpen()
-                override fun onMessage(text: String) = processServerMessage(text)
+                override fun onMessage(text: String) = processServerMessage(text) // 'text' is the parameter, not 'it'
                 override fun onClosing(code: Int, reason: String) = handleWebSocketClosing(code, reason)
                 override fun onFailure(t: Throwable, response: okhttp3.Response?) = handleWebSocketFailure(t, response)
                 override fun onSetupComplete() = handleSetupComplete()
@@ -125,9 +129,7 @@ class MainViewModel(
     private fun startRecording() {
         if (!_uiState.value.isSessionActive) return
 
-        audioHandler.startRecording { audioData ->
-            webSocketClient?.sendAudio(audioData)
-        }
+        audioHandler.startRecording() // Corrected: no lambda needed here, it's set in constructor
         _uiState.update {
             it.copy(
                 isListening = true,
@@ -295,12 +297,6 @@ class MainViewModel(
         }
     }
 
-    private fun initializeAudioHandler() {
-        if (!audioHandler.isInitialized()) {
-            audioHandler.initialize()
-        }
-    }
-
     private fun checkAudioPermission() {
         viewModelScope.launch {
             _events.emit(ViewEvent.ShowToast("Microphone permission required"))
@@ -310,9 +306,9 @@ class MainViewModel(
     private fun handleShareLog() {
         viewModelScope.launch {
             webSocketClient?.getLogFile()?.let { file ->
-                val uri = androidx.core.content.FileProvider.getUriForFile(
-                    audioHandler.context,
-                    "${audioHandler.context.packageName}.provider",
+                val uri = FileProvider.getUriForFile(
+                    application, // Use 'application' as context
+                    "${application.packageName}.provider", // Use 'application' as context
                     file
                 )
                 _events.emit(ViewEvent.ShareLogFile(uri))
@@ -341,7 +337,7 @@ class MainViewModel(
     override fun onCleared() {
         super.onCleared()
         disconnect()
-        audioHandler.release()
+        audioHandler.stopRecording() // Changed to stopRecording as release is private in AudioHandler
     }
 
     companion object {
