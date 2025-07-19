@@ -10,9 +10,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.compose.ui.platform.ComposeView;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,13 +58,13 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final MaterialToolbar topAppBar;
 
   @NonNull
-  public final RecyclerView transcriptLog;
+  public final ComposeView transcriptLog;
 
   protected ActivityMainBinding(Object _bindingComponent, View _root, int _localFieldCount,
       AppBarLayout appBarLayout, Button connectDisconnectBtn, ScrollView debugOverlayScroll,
       TextView debugOverlayText, Button debugSettingsBtn, ImageView historyBtn, TextView infoText,
       FloatingActionButton micBtn, ImageView settingsBtn, TextView statusText,
-      TextView toolbarInfoText, MaterialToolbar topAppBar, RecyclerView transcriptLog) {
+      TextView toolbarInfoText, MaterialToolbar topAppBar, ComposeView transcriptLog) {
     super(_bindingComponent, _root, _localFieldCount);
     this.appBarLayout = appBarLayout;
     this.connectDisconnectBtn = connectDisconnectBtn;

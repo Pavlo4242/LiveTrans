@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-59:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-66:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Thomas\\.gradle\\caches\\transforms-3\\5cb47bdaf2d426a71cfcefe986af6854\\transformed\\jetified-material3-1.1.2\\res\\values-en-rAU\\values-en-rAU.xml",

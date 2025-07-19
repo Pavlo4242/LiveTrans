@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-59:/values-en-rCA/values-en-rCA.xml",
+            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-66:/values-en-rCA/values-en-rCA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Thomas\\.gradle\\caches\\transforms-3\\b652274166aec079852d9ac78802c4a2\\transformed\\core-1.12.0\\res\\values-en-rCA\\values-en-rCA.xml",

@@ -1,78 +1,78 @@
 [
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_is_swap_horiz.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/is_swap_horiz.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_history.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_history.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/layout_dialog_settings.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/layout/dialog_settings.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/xml_data_extraction_rules.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/xml/data_extraction_rules.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/layout_dialog_user_settings.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/dialog_user_settings.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_history.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_history.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/mipmap_ic_launcher_round.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/mipmap/ic_launcher_round.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/xml_provider_paths.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/xml/provider_paths.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/mipmap_ic_launcher_round.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/mipmap/ic_launcher_round.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/layout_dialog_settings.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/dialog_settings.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/xml_provider_paths.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/xml/provider_paths.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/mipmap_ic_launcher.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/mipmap/ic_launcher.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_settings.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_settings.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_arrow_back.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_arrow_back.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_mic.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_mic.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/layout_item_translation.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/item_translation.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_stop.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_stop.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_stop.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_stop.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/layout_activity_main.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/layout/activity_main.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/mipmap_ic_launcher.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/mipmap/ic_launcher.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_close.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_close.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/layout_item_translation.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/layout/item_translation.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/xml_backup_rules.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/xml/backup_rules.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/xml_backup_rules.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/xml/backup_rules.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/layout_activity_main.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/layout/activity_main.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_settings.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_settings.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/xml_data_extraction_rules.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/layout_dialog_user_settings.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/layout/dialog_user_settings.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_is_swap_horiz.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/is_swap_horiz.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_close.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_close.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "com.livegemini.livegeminiapi-merged_res-61:/drawable_ic_mic.xml.flat",
-        "source": "com.livegemini.livegeminiapi-main-63:/drawable/ic_mic.xml"
+        "merged": "com.livegemini.livegeminiapi-merged_res-68:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.livegemini.livegeminiapi-main-70:/drawable/ic_launcher_foreground.xml"
     }
 ]

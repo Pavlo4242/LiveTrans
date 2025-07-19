@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-59:/values-ml/values-ml.xml",
+            "outputFile": "com.livegemini.livegeminiapi-mergeDebugResources-66:/values-ml/values-ml.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Thomas\\.gradle\\caches\\transforms-3\\8d77a14c8de13176e7e9bc2b38497716\\transformed\\material-1.11.0\\res\\values-ml\\values-ml.xml",

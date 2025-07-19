@@ -1,3 +1,5 @@
+package com.livegemini.ui.view // Added package declaration
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,12 +1,12 @@
+package com.livegemini.ui.view
+
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.viewinterop.AndroidViewBinding // If still using some XML
-import com.livegemini.viewmodel.MainViewModel // Your ViewModel
-import com.livegemini.databinding.ActivityMainBinding // If still using some XML
-import androidx.compose.material3.Scaffold // Or other top-level layout
+import com.livegemini.viewmodel.MainViewModel
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Icon
@@ -14,24 +14,34 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.ThumbUp // Added import
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.Phone // Added import
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.graphics.Color // For custom colors
-import androidx.compose.ui.res.stringResource // For strings from resources
-import androidx.compose.ui.res.painterResource // For drawable icons
-import com.livegemini.R // Assuming R.string.app_name etc. exist
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.painterResource
+import com.livegemini.R
 import com.livegemini.data.UiState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.livegemini.ui.view.TranslationItemComposable // Ensured import is present
+import com.livegemini.ui.view.TranslationItem // Ensured import is present
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
     val uiState by viewModel.uiState.collectAsState()
@@ -53,10 +63,10 @@ fun MainScreen(viewModel: MainViewModel) {
                 },
                 actions = {
                     IconButton(onClick = { /* Handle settings click */ }) {
-                        Icon(painter = painterResource(id = R.drawable.ic_settings), contentDescription = "Settings") // Use painterResource for custom drawables
+                        Icon(painter = painterResource(id = R.drawable.ic_settings), contentDescription = "Settings")
                     }
                     IconButton(onClick = { /* Handle history click */ }) {
-                        Icon(painter = painterResource(id = R.drawable.ic_history), contentDescription = "History") // Use painterResource for custom drawables
+                        Icon(Icons.Filled.ThumbUp, contentDescription = "History")
                     }
                 }
             )
@@ -65,9 +75,10 @@ fun MainScreen(viewModel: MainViewModel) {
             FloatingActionButton(
                 onClick = { viewModel.handleEvent(MainViewModel.UserEvent.MicClicked) },
                 modifier = Modifier.padding(16.dp),
-                containerColor = if (uiState.isListening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary // Red for listening, primary otherwise
+                containerColor = if (uiState.isListening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
             ) {
-                Icon(painter = painterResource(id = R.drawable.ic_mic), contentDescription = "Mic") // Use painterResource for custom drawables
+                  Icon(Icons.Filled.ThumbUp, contentDescription = "Mic")
+            //    Icon(painter = painterResource(id = R.drawable.ic_mic), contentDescription = "Mic")
             }
         },
         bottomBar = {
@@ -87,8 +98,6 @@ fun MainScreen(viewModel: MainViewModel) {
                     },
                     textAlign = TextAlign.Center
                 )
-                // Add debug settings button, connect/disconnect button if needed.
-                // For simplicity, they are omitted in this basic example.
             }
         }
     ) { paddingValues ->
@@ -98,7 +107,7 @@ fun MainScreen(viewModel: MainViewModel) {
         ) {
             if (uiState.translations.isEmpty()) {
                 Text(
-                    text = uiState.statusText, // Or a separate "Tap the mic" info text
+                    text = uiState.statusText,
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier
@@ -108,7 +117,7 @@ fun MainScreen(viewModel: MainViewModel) {
             } else {
                 LazyColumn(
                     state = listState,
-                    reverseLayout = true, // To show newest items at the bottom
+                    reverseLayout = true,
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(uiState.translations) { (text, isUser) ->
@@ -118,13 +127,12 @@ fun MainScreen(viewModel: MainViewModel) {
             }
         }
 
-        // Handle debug overlay visibility
         if (uiState.showDebugOverlay) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(Alignment.BottomStart)
-                    .background(Color.Black.copy(alpha = 0.5f)) // Semi-transparent black background
+                    .background(Color.Black.copy(alpha = 0.5f))
                     .padding(8.dp)
             ) {
                 Text(
@@ -137,10 +145,9 @@ fun MainScreen(viewModel: MainViewModel) {
         }
     }
 
-    // Scroll to the latest message whenever new messages arrive
     LaunchedEffect(uiState.translations.size) {
         if (uiState.translations.isNotEmpty()) {
-            listState.animateScrollToItem(0) // Scroll to the first (newest) item
+            listState.animateScrollToItem(0)
         }
     }
 }

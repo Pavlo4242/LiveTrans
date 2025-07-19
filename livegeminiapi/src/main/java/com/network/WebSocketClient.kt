@@ -10,9 +10,7 @@ import kotlinx.coroutines.launch
 import okhttp3.*
 import okio.ByteString
 import java.io.File
-import okio.ByteString
 import okhttp3.logging.HttpLoggingInterceptor
-import java.util.concurrent.TimeUnit
 import java.io.FileWriter
 import java.io.PrintWriter
 import java.util.concurrent.TimeUnit
@@ -22,6 +20,20 @@ class WebSocketClient private constructor(
     private val config: WebSocketConfig,
     private val listener: WebSocketListener
 ) {
+    companion object {
+        private const val TAG = "WebSocketClient"
+
+        // Modified: Moved the 'create' function directly into the companion object
+        fun create(
+            context: Context,
+            config: WebSocketConfig,
+            listener: WebSocketListener
+        ): WebSocketClient {
+            return WebSocketClient(context, config, listener)
+        }
+        private const val SYS = "System_Instruction"
+    }
+
     private var webSocket: WebSocket? = null
     private var isSetupComplete = false
     private var isConnected = false
@@ -128,7 +140,7 @@ class WebSocketClient private constructor(
 
     private fun handleBinaryMessage(bytes: ByteString) {
         scope.launch {
-            logMessage("INCOMING BINARY", "size=${bytes.size()}")
+            logMessage("INCOMING BINARY", "size=${(bytes.size)}")
             processMessage(bytes.utf8())
         }
     }
@@ -211,18 +223,6 @@ class WebSocketClient private constructor(
         Log.e(TAG, context, error)
         logFileWriter?.println("ERROR [$context]: ${error.message}")
         error.printStackTrace(logFileWriter)
-    }
-
-    companion object {
-        private const val TAG = "WebSocketClient"
-
-        fun create(
-            context: Context,
-            config: WebSocketConfig,
-            listener: WebSocketListener
-        ): WebSocketClient {
-            return WebSocketClient(context, config, listener)
-        }
     }
 
     interface WebSocketListener {
