@@ -1,19 +1,17 @@
 plugins {
-    // id("com.android.application")
+    id("com.android.application")
     id("org.jetbrains.kotlin.android") version "1.9.22"
     id("org.jetbrains.kotlin.kapt") version "1.9.22"
-	id("com.android.library")
 }
 
-
 android {
-    namespace = "com.livegemini.livegeminiapi"
+    namespace = "com.livegemini"
     compileSdk = 34
 
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/main/AndroidManifest.xml")
-            java.srcDirs("src/main/java")
+            java.srcDirs("src/main/kotlin")
             res.srcDirs("src/main/res")
             assets.srcDirs("src/main/assets")
         }
@@ -21,8 +19,11 @@ android {
 }
 
     defaultConfig {
+        applicationId = "com.livegemini"
         minSdk = 26
         targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -30,7 +31,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,24 +39,22 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
     kotlinOptions {
         jvmTarget = "17"
     }
-
     buildFeatures {
         compose = true
+        // Remove these if using Compose primarily
+        // dataBinding = true
+        // viewBinding = true
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
