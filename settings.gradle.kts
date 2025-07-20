@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "LiveTrans"
 include(":livegeminiapi")
-inclue(":app")
+include(":app")
