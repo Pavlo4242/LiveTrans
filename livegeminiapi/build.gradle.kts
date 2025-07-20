@@ -8,14 +8,6 @@ android {
     namespace = "com.livegemini"
     compileSdk = 34
 
-
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("livegeminiapi/src/main/AndroidManifest.xml")
-        }
-    }
-}
-
     defaultConfig {
         applicationId = "com.livegemini"
         minSdk = 26
@@ -28,15 +20,11 @@ android {
         }
     }
 
-        buildFeatures {
-        compose = true
-        dataBinding = true
-        viewBinding = true
-     }
-        composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1" // Use a recent version
-        }
-
+   sourceSets {
+        getByName("main") {
+            manifest.srcFile("livegeminiapi/src/main/AndroidManifest.xml")
+}
+}
 
     buildTypes {
         release {
@@ -47,25 +35,34 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
+        dataBinding = true
+        viewBinding = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
+
+
 
 dependencies {
     // Core Android
