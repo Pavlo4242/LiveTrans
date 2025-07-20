@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<!-- In Pavlo4242 LiveTrans/Src/main - versioned as 0.0.0-- og pull from BWC as bwctrans 
-Unsure if this build (in main gets built vs other directory LiveTrans/livegeminiapi/src/main -->
+<!-- 
+	In Pavlo4242 LiveTrans/Src/main - versioned as 0.0.0-- og pull from BWC as bwctrans 
+Unsure if this build (in main gets built vs other directory LiveTrans/livegeminiapi/src/main 
+	-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
