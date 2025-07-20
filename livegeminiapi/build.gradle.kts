@@ -8,6 +8,14 @@ android {
     namespace = "com.livegemini"
     compileSdk = 34
 
+
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("livegeminiapi/src/main/AndroidManifest.xml")
+        }
+    }
+}
+
     defaultConfig {
         applicationId = "com.livegemini"
         minSdk = 26
