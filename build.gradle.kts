@@ -16,7 +16,7 @@ android {
             assets.srcDirs("src/main/assets")
         }
     }
-}
+
 
     defaultConfig {
         applicationId = "com.livegemini"
@@ -66,7 +66,6 @@ android {
         }
     }
 }
-
 dependencies {
     // Core Android
     implementation("androidx.core:core-ktx:1.12.0")
