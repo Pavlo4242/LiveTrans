@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">A.S.Build LiveGemini</string>
+    <string name="app_name">A.S.LiveGemini .5</string>
 
     <string-array name="api_versions">
         <item>v1alpha</item>
