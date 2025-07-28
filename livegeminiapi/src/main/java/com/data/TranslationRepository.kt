@@ -1,9 +1,12 @@
-package com.livegemini.data // Corrected package
+package com.data // Corrected package
 
 import android.content.SharedPreferences
 import android.content.res.Resources
 import com.livegemini.R
 // Removed: import com.data.ApiModels (ApiVersion and ApiKeyInfo are in this package directly)
+
+data class ApiVersion(val displayName: String, val value: String)
+data class ApiKeyInfo(val displayName: String, val value: String)
 
 class TranslationRepository(
     private val prefs: SharedPreferences,

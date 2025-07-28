@@ -1,57 +1,55 @@
-package com.livegemini
+package com
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.ui.Modifier
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.ViewModelProvider
 import com.livegemini.audio.AudioHandler
-import com.livegemini.network.WebSocketClient
-import com.livegemini.viewmodel.MainViewModel
-import com.livegemini.viewmodel.MainViewModelFactory
-import com.livegemini.ui.view.MainScreen
+import com.ui.screens.MainScreen
+import com.ui.screens.MainScreenContent // Keep this import if MainScreenContent is still used directly
+import com.viewmodel.MainViewModel
+import com.viewmodel.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var audioHandler: AudioHandler
+    private lateinit var audioHandler: AudioHandler // Kept for clarity, though its lifecycle is tied to ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        audioHandler = AudioHandler(applicationContext) { audioData ->
-            // Pass audio data to ViewModel to send via WebSocket
-            // This is handled internally by MainViewModel via audioHandler.startRecording() callback
-            // Note: The audio data is now passed directly to the WebSocketClient within MainViewModel
-            // This lambda in AudioHandler's constructor is for AudioHandler to provide data,
-            // but MainViewModel directly calls webSocketClient.sendAudio(audioData)
-            // within its own startRecording method.
-        }
+        // AudioHandler is initialized here.
+        // It will be passed to the ViewModel,
+        // which will manage its lifecycle (start, stop, release).
+        audioHandler = AudioHandler(application) // Correctly uses application context
 
-        // Fix for "Unresolved reference: Factory" on WebSocketClient.Factory
-        // Correctly reference the WebSocketClient.Factory singleton object
-        val webSocketClientFactory = WebSocketClient.Companion
+        // The factory provides dependencies to the ViewModel.
+        // NOTE: The WebSocketClient.Companion part is unusual.
+        // We'll assume your factory is set up to handle it.
+        // A cleaner approach might be to not pass the companion object.
+        val factory = MainViewModelFactory(
+            application,
+            audioHandler
+            // Passing WebSocketClient.Companion is not necessary if the ViewModel
+            // can create the client directly, which our revised ViewModel now does.
+            // You may need to adjust your MainViewModelFactory accordingly.
+        )
 
-        val factory = MainViewModelFactory(application, audioHandler, webSocketClientFactory)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         setContent {
-            // Assuming BwcTransTheme is your app's theme
-            // BwcTransTheme {
-            val uiState by viewModel.uiState.collectAsState()
-
-            MainScreen(viewModel = viewModel)
-            // }
+            // Your app's theme should wrap the main screen.
+            MaterialTheme { // Or your specific app theme
+                // CORRECTED: Pass the viewModel directly to MainScreen
+                MainScreen(viewModel = viewModel) // [cite: 2]
+            }
         }
-    }
-
-
-
+    } // <- CORRECTED: The brace for onCreate ends here.
     override fun onDestroy() {
         super.onDestroy()
-        // ViewModel onCleared() handles audioHandler.release() and websocket disconnect
+        // It's correct that you don't need to manually release resources here.
+        // The ViewModel's onCleared() method, which is tied to the Activity's
+        // lifecycle, is the proper place for cleanup to avoid memory leaks.
     }
 }

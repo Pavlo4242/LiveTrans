@@ -7,7 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorSurface"
+<<<<<<< Updated upstream:app/src/main/res/layout/activity_main.xml
         tools:context=".MainActivity">
+=======
+        tools:context="com.MainActivity" android:tag="layout/activity_main_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+>>>>>>> Stashed changes:livegeminiapi/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir/layout/activity_main.xml
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"

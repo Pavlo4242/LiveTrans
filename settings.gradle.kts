@@ -4,6 +4,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { setUrl("https://jitpack.io") }
     }
  plugins {
         id("com.android.application") version "8.2.2" apply false
@@ -17,6 +18,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+<<<<<<< Updated upstream
+=======
+        gradlePluginPortal()
+        maven { setUrl("https://jitpack.io") }
+>>>>>>> Stashed changes
     }
 }
 

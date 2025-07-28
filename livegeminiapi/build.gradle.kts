@@ -37,6 +37,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            resValue("string", "PORT_NUMBER", "7712")
+        }
     }
 
     compileOptions {
@@ -104,4 +107,10 @@ dependencies {
     // Debug
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+<<<<<<< Updated upstream
 }
+=======
+    debugImplementation("com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7")
+    debugImplementation("com.guolindev.glance:glance:1.1.0")
+}
+>>>>>>> Stashed changes

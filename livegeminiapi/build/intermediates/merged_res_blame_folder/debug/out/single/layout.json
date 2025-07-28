@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-mergeDebugResources-75:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-main-78:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.livegemini.livegeminiapi-mergeDebugResources-75:/layout/activity_main.xml",
+        "source": "com.livegemini.livegeminiapi-main-78:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-mergeDebugResources-75:\\layout\\dialog_user_settings.xml",
+        "source": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-main-78:\\layout\\dialog_user_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-mergeDebugResources-75:\\layout\\dialog_settings.xml",
+        "source": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-main-78:\\layout\\dialog_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-mergeDebugResources-75:\\layout\\item_translation.xml",
+        "source": "C:\\Users\\Thomas\\.gradle\\daemon\\8.4\\com.livegemini.livegeminiapi-main-78:\\layout\\item_translation.xml"
+    }
+]

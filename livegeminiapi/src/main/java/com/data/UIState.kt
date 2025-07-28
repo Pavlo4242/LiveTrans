@@ -1,15 +1,20 @@
-// app/src/main/java/com/livegemini/data/UiState.kt
-package com.livegemini.data
+package com.data
 
+// FIXED: This file now correctly uses the ConnectionState sealed class.
 data class UiState(
-    val statusText: String = "Status: Disconnected\nTap the microphone to connect",
+    val connectionState: ConnectionState = ConnectionState.Idle,
     val toolbarInfoText: String = "Model: N/A\nAPI: N/A",
     val isListening: Boolean = false,
-    val isSessionActive: Boolean = false,
-    val connectButtonText: String = "Connect",
-    val translations: List<Pair<String, Boolean>> = emptyList(),
-    val showInfoText: Boolean = true,
-    val isMicButtonEnabled: Boolean = false,
+    val statusText: String = "Tap the microphone to connect",
+    val translations: List<TranslationItem> = emptyList(),
+    val isMicButtonEnabled: Boolean = true,
     val showDebugOverlay: Boolean = false,
-    val debugLog: String = ""
-)
+    val debugLog: String = "",
+    val showUserSettingsDialog: Boolean = false,
+    val showDebugSettingsDialog: Boolean = false
+) {
+    val isSessionActive: Boolean
+        get() = connectionState is ConnectionState.Connected ||
+                connectionState is ConnectionState.Connecting ||
+                connectionState is ConnectionState.Reconnecting
+}

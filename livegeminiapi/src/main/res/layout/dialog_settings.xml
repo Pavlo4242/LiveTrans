@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:max="2000"
-                    android:progress="800"/>
+                    android:progress="800" />
 
                 <TextView
                     android:id="@+id/vadValue"
